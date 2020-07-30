@@ -1,4 +1,5 @@
 import React from 'react';
+import './child.less'
 
 export default class Child extends React.Component{
     constructor(props) {
@@ -43,6 +44,7 @@ export default class Child extends React.Component{
 
     render(){
         return <div>
+            <p className="div">验证生命周期子组件的收到值</p>
             <p>{this.props.name}</p>
         </div>
     }

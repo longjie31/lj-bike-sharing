@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './App';
-import Life from './pages/demo/life';
+// import Life from './pages/demo/life';
+import Admin from './admin';
 import * as serviceWorker from './serviceWorker';
+import 'antd/dist/antd.less';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Life />
+    <Admin />
   </React.StrictMode>,
   document.getElementById('root')
 );
