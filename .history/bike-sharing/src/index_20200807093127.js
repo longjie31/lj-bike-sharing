@@ -5,14 +5,14 @@ import './index.css';
 // import Life from './pages/demo/life';
 import Admin from './admin';
 import * as serviceWorker from './serviceWorker';
-import Router from './router';
+import Router from './router'
 import 'antd/dist/antd.less';
 import Home from './pages/route_demo/route1/Home'
 /* <Home /> */
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router />
+    <Admin />
   </React.StrictMode>,
   document.getElementById('root')
 );

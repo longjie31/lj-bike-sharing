@@ -12,7 +12,7 @@ import Home from './pages/route_demo/route1/Home'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router />
+    <Admin />
   </React.StrictMode>,
   document.getElementById('root')
 );
