@@ -6,11 +6,13 @@ import './index.css';
 import Admin from './admin';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.less';
-import Home from './pages/route_demo/route1/Home'
+
+// import Home from './pages/route_demo/route1/Home'
+import IRouter from './pages/route_demo/router2/router'
 /* <Admin /> */
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <IRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );
