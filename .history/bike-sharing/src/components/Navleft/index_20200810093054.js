@@ -16,11 +16,8 @@ const { SubMenu } = Menu;
 
 
 export default class Navleft extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            name:'后台管理中心'
-        };
+    constructor(){
+        this.
     }
 
     componentWillMount(){
@@ -50,7 +47,7 @@ export default class Navleft extends React.Component{
             <div>
                 <div className="logo">
                     <img src="/assets/icon_log.svg" alt=""/>
-                    <h1>{this.state.name}</h1>
+                    <h1>鸭之后台</h1>
                 </div>
                 <Menu theme='dark'>
                 {this.state.menuTreeNode}

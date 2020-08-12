@@ -16,7 +16,7 @@ const { SubMenu } = Menu;
 
 
 export default class Navleft extends React.Component{
-    constructor(props){
+    constructor(){
         super(props);
         this.state = {
             name:'后台管理中心'
