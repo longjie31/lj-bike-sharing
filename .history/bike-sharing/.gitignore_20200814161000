@@ -18,6 +18,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 /.history
+.history
 # misc
 .DS_Store
 .env.local

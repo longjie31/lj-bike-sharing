@@ -10,7 +10,6 @@ import {
   ContainerOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import {NavLink} from 'react-router-dom'
 import './index.less';
 
 const { SubMenu } = Menu;
@@ -60,9 +59,7 @@ export default class Navleft extends React.Component{
                     </SubMenu>
                 );
             }
-        return <Menu.Item  title={item.title} key={item.key}>
-            <NavLink to={item.key}>{item.title}</NavLink>
-        </Menu.Item>
+        return <Menu.Item  title={item.title} key={item.key}>{item.title}</Menu.Item>
         })
           {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
             <Menu.Item key="5">Option 5</Menu.Item>
