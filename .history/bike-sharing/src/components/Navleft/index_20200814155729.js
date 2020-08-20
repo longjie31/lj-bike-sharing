@@ -1,14 +1,14 @@
 import React from 'react';
 import MenuConfig from './../../config/menuConfig'
 import { Menu, Button } from 'antd';
-import {NavLink} from 'react-router-dom'
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import {
+  AppstoreOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   PieChartOutlined,
   DesktopOutlined,
   ContainerOutlined,
+  MailOutlined,
 } from '@ant-design/icons';
 import './index.less';
 
@@ -25,16 +25,6 @@ export default class Navleft extends React.Component{
         };
     }
 
-    state = {
-        collapsed: false,
-      };
-    
-      toggleCollapsed = () => {
-        this.setState({
-          collapsed: !this.state.collapsed,
-        });
-      };
-
     componentWillMount(){
         const menuTreeNode = this.renderMenu(MenuConfig);
         // 获取变量以后，要用setState存进去，一旦调用setState就会调用render
@@ -45,7 +35,7 @@ export default class Navleft extends React.Component{
 
     toggleCollapsed = () => {
         this.setState({
-            collapsed: !this.state.collapsed,
+          collapsed: !this.state.collapsed,
         });
     };
 
@@ -61,7 +51,7 @@ export default class Navleft extends React.Component{
             }
         return <Menu.Item  title={item.title} key={item.key}>{item.title}</Menu.Item>
         }) */
-        return data.map((item)=>{
+        return  /* return data.map((item)=>{
             if(item.children){
                 return (
                     <SubMenu title={item.title} key={item.key}>
@@ -69,11 +59,20 @@ export default class Navleft extends React.Component{
                     </SubMenu>
                 );
             }
-        return <Menu.Item  title={item.title} key={item.key}>
-            <NavLink to={item.key}>{item.title}</NavLink>
-        </Menu.Item>
-        })
-          {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
+        return <Menu.Item  title={item.title} key={item.key}>{item.title}</Menu.Item>
+        }) */
+        
+        
+        <Menu.Item key="1" icon={<PieChartOutlined />}>
+            Option 1
+          </Menu.Item>
+          <Menu.Item key="2" icon={<DesktopOutlined />}>
+            Option 2
+          </Menu.Item>
+          <Menu.Item key="3" icon={<ContainerOutlined />}>
+            Option 3
+          </Menu.Item>
+          <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
             <Menu.Item key="5">Option 5</Menu.Item>
             <Menu.Item key="6">Option 6</Menu.Item>
             <Menu.Item key="7">Option 7</Menu.Item>
@@ -86,7 +85,7 @@ export default class Navleft extends React.Component{
               <Menu.Item key="11">Option 11</Menu.Item>
               <Menu.Item key="12">Option 12</Menu.Item>
             </SubMenu>
-          </SubMenu> */}
+          </SubMenu>
     }
 
     render(){
@@ -98,7 +97,7 @@ export default class Navleft extends React.Component{
                 </div>
                 <Menu
                     defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['/admin/home']}
+                    defaultOpenKeys={['sub1']}
                     mode="inline"
                     theme="dark"
                     inlineCollapsed={this.state.collapsed}>

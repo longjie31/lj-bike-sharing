@@ -1,12 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-export default class Buttons extends React.Component{
+export default class Button extends React.Component{
+
     render(){
         return(
-            <div>
-                这是按钮页面
-            </div>
-        );
+            <div>这是按钮页面</div>
+        )
     }
-
 }

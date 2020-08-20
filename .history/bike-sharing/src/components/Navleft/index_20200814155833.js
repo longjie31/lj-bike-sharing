@@ -1,14 +1,14 @@
 import React from 'react';
 import MenuConfig from './../../config/menuConfig'
 import { Menu, Button } from 'antd';
-import {NavLink} from 'react-router-dom'
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import {
+  AppstoreOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   PieChartOutlined,
   DesktopOutlined,
   ContainerOutlined,
+  MailOutlined,
 } from '@ant-design/icons';
 import './index.less';
 
@@ -25,16 +25,6 @@ export default class Navleft extends React.Component{
         };
     }
 
-    state = {
-        collapsed: false,
-      };
-    
-      toggleCollapsed = () => {
-        this.setState({
-          collapsed: !this.state.collapsed,
-        });
-      };
-
     componentWillMount(){
         const menuTreeNode = this.renderMenu(MenuConfig);
         // 获取变量以后，要用setState存进去，一旦调用setState就会调用render
@@ -45,7 +35,7 @@ export default class Navleft extends React.Component{
 
     toggleCollapsed = () => {
         this.setState({
-            collapsed: !this.state.collapsed,
+          collapsed: !this.state.collapsed,
         });
     };
 
@@ -69,9 +59,7 @@ export default class Navleft extends React.Component{
                     </SubMenu>
                 );
             }
-        return <Menu.Item  title={item.title} key={item.key}>
-            <NavLink to={item.key}>{item.title}</NavLink>
-        </Menu.Item>
+        return <Menu.Item  title={item.title} key={item.key}>{item.title}</Menu.Item>
         })
           {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
             <Menu.Item key="5">Option 5</Menu.Item>
@@ -98,7 +86,7 @@ export default class Navleft extends React.Component{
                 </div>
                 <Menu
                     defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['/admin/home']}
+                    defaultOpenKeys={['sub1']}
                     mode="inline"
                     theme="dark"
                     inlineCollapsed={this.state.collapsed}>
