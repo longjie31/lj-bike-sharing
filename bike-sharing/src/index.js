@@ -11,9 +11,7 @@ import Home from './pages/route_demo/route1/Home'
 /* <Home /> */
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router />
-  </React.StrictMode>,
+    <Router />,
   document.getElementById('root')
 );
 

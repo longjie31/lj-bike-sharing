@@ -3,6 +3,7 @@ import {HashRouter,Route, Switch} from 'react-router-dom'
 import App from './App'
 import Login from './pages/login/login'
 import Admin from './admin';
+import Buttons from './pages/ui/buttons'
 export default class IRouter extends React.Component{
 
     render(){
@@ -11,9 +12,13 @@ export default class IRouter extends React.Component{
             <HashRouter>
                 <App>
                     <Route path='/login' component={Login} />
-                    <Route exact path='/admin' component={Admin} />
+                    <Route path='/admin' render={()=>
+                    <Admin>
+                        <Route path='/admin/ui/buttons' component={Buttons} />
+                    </Admin>
+                    }/>
                 </App>
             </HashRouter>
         );
-    }
+    } 
 }

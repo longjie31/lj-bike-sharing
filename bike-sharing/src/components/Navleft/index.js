@@ -1,21 +1,31 @@
 import React from 'react';
 import MenuConfig from './../../config/menuConfig'
 import { Menu, Button } from 'antd';
+import {NavLink} from 'react-router-dom'
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-} from '@ant-design/icons';
+    MenuUnfoldOutlined,
+    MenuFoldOutlined,
+    PieChartOutlined,
+    DesktopOutlined,
+    ContainerOutlined
+  } from '@ant-design/icons';
 import './index.less';
 
 const { SubMenu } = Menu;
 
 
 export default class Navleft extends React.Component{
+
+    state = {
+        collapsed: false,
+      };
+    
+      toggleCollapsed = () => {
+        this.setState({
+          collapsed: !this.state.collapsed,
+        });
+      };
 
     componentWillMount(){
         const menuTreeNode = this.renderMenu(MenuConfig);
@@ -35,8 +45,8 @@ export default class Navleft extends React.Component{
                     </SubMenu>
                 );
             }
-        return <Menu.Item  title={item.title} key={item.key}>{item.title}</Menu.Item>
-        })
+        return (<Menu.Item  title={item.title} key={item.key}>{item.title}</Menu.Item>);
+        });
     }
 
     render(){
@@ -44,11 +54,17 @@ export default class Navleft extends React.Component{
             <div>
                 <div className="logo">
                     <img src="/assets/icon_log.svg" alt=""/>
-                    <h1>鸭之后台</h1>
+                    <h1>后台管理</h1>
                 </div>
-                <Menu theme='dark'>
-                {this.state.menuTreeNode}
-                </Menu>
+                <Menu
+                    defaultSelectedKeys={['1']}
+                    defaultOpenKeys={['sub1']}
+                    mode="inline"
+                    theme="dark"
+                    inlineCollapsed={this.state.collapsed}
+                  >
+                    {this.state.menuTreeNode}
+                  </Menu>
             </div>
         );
     }
