@@ -8,16 +8,16 @@ const menuList = [
         key:'/admin/ui',
         children:[
             {
-                title:'按钮',
+                title:'弹窗',
+                key:'/admin/ui/modals'
+            },
+            {
+                title:'按钮123',
                 key:'/admin/ui/buttons'
             },
             {
-                title:'弹窗',
-                key:'admin/ui/modals'
-            },
-            {
                 title:'Loading',
-                key:'admin/ui/loading'
+                key:'/admin/ui/loading'
             }
         ]
     }

@@ -13,11 +13,11 @@ const menuList = [
             },
             {
                 title:'弹窗',
-                key:'admin/ui/modals'
+                key:'/admin/ui/modals'
             },
             {
                 title:'Loading',
-                key:'admin/ui/loading'
+                key:'/admin/ui/loading'
             }
         ]
     }
