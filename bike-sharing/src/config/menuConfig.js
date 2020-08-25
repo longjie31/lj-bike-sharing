@@ -18,6 +18,22 @@ const menuList = [
             {
                 title:'Loading',
                 key:'/admin/ui/loading'
+            },
+            {
+                title:'通知提醒',
+                key:'/admin/ui/notification'
+            },
+            {
+                title:'全局通知',
+                key:'/admin/ui/message'
+            },
+            {
+                title:'tab标签页',
+                key:'/admin/ui/tabs'
+            },
+            {
+                title:'图片画廊',
+                key:'/admin/ui/gallery'
             }
         ]
     }
