@@ -34,7 +34,25 @@ const menuList = [
             {
                 title:'图片画廊',
                 key:'/admin/ui/gallery'
+            },
+            {
+                title:'轮播图',
+                key:'/admin/ui/carousel'
             }
+        ]
+    },
+    {
+        title:'表单',
+        key:'/admin/form',
+        children:[
+            {
+                title:'登录',
+                key:'/admin/form/login'
+            },
+            {
+                title:'注册',
+                key:'/admin/form/register'
+            },
         ]
     }
 ];
