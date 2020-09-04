@@ -14,6 +14,9 @@ import Carousels from './pages/ui/carousel'
 import NoMatch from './pages/nomatch'
 import FormLogin from './pages/form/login'
 import MyRegister from './pages/form/register'
+import MyFuncForm from './pages/form/funcForm'
+import MyBasicTab from './pages/table/basicTable'
+import MySeniorTab from './pages/table/seniorTab'
 
 
 export default class IRouter extends React.Component{
@@ -37,6 +40,9 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/ui/carousel" component={Carousels} />
                             <Route path="/admin/form/login" component={FormLogin} />
                             <Route path="/admin/form/register" component={MyRegister} />
+                            <Route path="/admin/form/funcForm" component={MyFuncForm} />
+                            <Route path="/admin/table/basic" component={MyBasicTab} />
+                            <Route path="/admin/table/senior" component={MySeniorTab} />
                             <Route component={NoMatch} />
                         </Switch>
                     </Admin>

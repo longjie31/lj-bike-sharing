@@ -1,75 +1,89 @@
-import React from 'react';
-import {
-    Card,Form,Input,Button,message,Checkbox,Radio,Select,Switch,DatePicker,TimePicker,InputNumber,Upload
-} from 'antd';
+import {Card,Form,Input,Button,message,Checkbox,Radio,Select,Switch,DatePicker,TimePicker,InputNumber,Upload} from 'antd';
+import React, {
+    useState,
+    useEffect
+} from 'react';
 import {
     UserOutlined,
     UnlockOutlined,
     LoadingOutlined,
     PlusOutlined
 } from '@ant-design/icons';
-import locale from 'antd/es/locale/zh_CN';
-
 const FormItem = Form.Item;
 const {Option} = Select;
 const RadioGroup = Radio.Group;
 const TextArea = Input.TextArea;
-
-
-export default class myRegister extends React.Component{
-    state = {
-        loading:false,
-        disable:true
+const layout = {
+    labelCol:{
+        xs:24,
+        sm:4
+    },
+    wrapperCol:{
+        xs:24,
+        sm:16
     }
-    formRef = React.createRef();
-    formItemLayout = {
-        labelCol:{
-            xs:24,
-            sm:4
-        },
-        wrapperCol:{
-            xs:24,
-            sm:16
-        }
+};
+const tailLayout = {
+    wrapperCol: {
+        offset: 4,
+        span: 16,
+    },
+};
+const FuncForm = () => {
+    // 实例化form
+    const [form] = Form.useForm();
+    const [, forceUpdate] = useState();
+    let uploadObj = {
+        loading: false,
+        imageUrl: ''
     }
-    offsetLayout = {
-        wrapperCol:{
-            xs:24,
-            sm:{
-                span:12,
-                offset:4
-            }
-        }
+    // To disable submit button at the beginning.
+    useEffect(() => {
+        forceUpdate({});
+    }, []);
+
+    // 注册表单提交
+    const onFinish = values => {
+        console.log(values);
     }
 
-    componentDidMount(){
-       /*  this.setState({
-            disable: !this.formRef.current.isFieldsTouched(true)||this.formRef.current.getFieldsError().filter(({ errors }) => errors.length).length
-        }) */
-    }
+    // 重置
+    const onReset = () => {
+        form.resetFields();
+    };
 
-    handleChange = info =>{
+    // 填充
+    const onFill = () => {
+        form.setFieldsValue({
+            sex:'1',
+            age: 18,
+            state: '2',
+        });
+    };
+
+    // 上传
+    const  handleChange = info =>{
         if(info.file.status === 'uploading'){
-            this.setState({loading:true});
+            uploadObj.loading = true;
             return;
         }
         if (info.file.status === 'done') {
-            this.getBase64(info.file.originFileObj, imageUrl => {
-                this.setState({
-                    imageUrl,
-                    loading: false
-                })
+            getBase64(info.file.originFileObj, imageUrl => {
+                uploadObj = {
+                    loading: false,
+                    imageUrl: imageUrl
+                }
             })
         }
     }
 
-    getBase64(img, callback){
+    const getBase64 = (img, callback) => {
         const reader = new FileReader();
-        reader.addEventListener('load',()=>callback(reader.result));
+        reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(img);
     }
 
-    beforeUpload(file){
+    const beforeUpload = (file) => {
         const isJpgOrPng = file.type ==='image/jpeg' || file.type === 'image/png';
         if(!isJpgOrPng){
             message.error('只能上传JPG/PNG文件');
@@ -79,41 +93,26 @@ export default class myRegister extends React.Component{
             message.error('图片必须小于2MB');
         }
         return isJpgOrPng && isLt2M;
-
     }
 
+    const uploadButton = (
+        <div>
+            {uploadObj.loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div className="ant-upload-text">上传</div>
+        </div>
+    );
 
-    // 注册表单提交
-    onFinish = values => {
-        let userInfo = this.formRef.current.getFieldsValue();
-        console.log(userInfo);
-        console.log(values);
-    }
-
-    onRest = () =>{
-        this.formRef.current.resetFields();
-    }
-
-    render(){
-        const uploadButton = (
-            <div>
-                {this.state.loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div className="ant-upload-text">Upload</div>
-            </div>
-        );
-        const { imageUrl } = this.state;
-        return(<div style={{width:'100%'}}>
-            <Card title="注册表单">
-                <Form ref={this.formRef} onFinish={this.onFinish}
-                {...this.formItemLayout}
+    return(
+        <div style={{width:'100%'}}>
+            <Card title="函数组件注册表单">
+                <Form form={form} name="horizontal_login" onFinish={onFinish} {...layout}
                 initialValues={{
                     sex:'1',
                     age: 18,
                     state: '2',
                     hobby: ['3','4'],
                     married: true
-                }}
-                >
+                }}>
                     <FormItem label="用户名"
                         name="name"
                         validateTrigger = "onBlur"
@@ -228,7 +227,7 @@ export default class myRegister extends React.Component{
                         label="生日"
                         name="birthday"
                     >
-                        <DatePicker locale={locale} placeholder="请选择你的生日"/>
+                        <DatePicker placeholder="请选择你的生日"/>
                     </FormItem>
                     <FormItem 
                         label="联系地址"
@@ -248,9 +247,9 @@ export default class myRegister extends React.Component{
                         label="早起时间"
                         name="getUp"
                     >
-                        <TimePicker locale={locale} placeholder="请选择你的早起时间"/>
+                        <TimePicker placeholder="请选择你的早起时间"/>
                     </FormItem>
-                    <FormItem
+                    {/* <FormItem
                         label="头像"
                     >
                         <Upload 
@@ -259,38 +258,39 @@ export default class myRegister extends React.Component{
                             className="avatar-uploader"
                             showUploadList={false}
                             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            beforeUpload={this.beforeUpload}
-                            onChange={this.handleChange}
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
                         >
-                            {imageUrl?<img src={imageUrl} alt="头像" style={{width:'100%'}} />:uploadButton}
+                            {uploadObj.imageUrl?<img src={uploadObj.imageUrl} alt="头像" style={{width:'100%'}} />:uploadButton}
                         </Upload>
-                    </FormItem>
+                    </FormItem> */}
                     <FormItem
-                        {...this.offsetLayout}
+                        {...tailLayout}
                         name='remember'
                     >
                         <Checkbox>我已阅读过相关协议</Checkbox>
                     </FormItem>
-                    <FormItem {...this.offsetLayout}>
-                        <Button type="primary" htmlType="submit">注册</Button> 
-                        <Button onClick={this.onRest}>重置</Button> 
+                    <FormItem shouldUpdate={true} {...tailLayout}>
+                        {() => (
+                            <div>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            disabled={!form.isFieldsTouched(true) ||form.getFieldsError().filter(({ errors }) => errors.length).length
+                        }>登录</Button>
+                        <Button htmlType="button" onClick={onReset}>
+                        重置
+                    </Button>
+                    <Button type="link" htmlType="button" onClick={onFill}>
+                        填充
+                    </Button>
+                    </div>
+                    )}
                     </FormItem>
-                    {/* <FormItem {...this.offsetLayout} shouldUpdate>
-                        {
-                            ()=>(
-                                <Button type="primary" htmlType="submit"
-                                    disable={
-                                        !this.formRef.current.isFieldsTouched(true) ||this.formRef.getFieldsError().filter(({ errors }) => errors.length).length
-                                    }
-                                >
-                                    注册
-                                </Button>
-                            )
-                        }
-                        <Button onClick={this.onRest}>重置</Button> 
-                    </FormItem> */}
                 </Form>
             </Card>
-        </div>);
-    }
+        </div>
+    )
 }
+
+export default FuncForm;

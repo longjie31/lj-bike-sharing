@@ -53,6 +53,24 @@ const menuList = [
                 title:'注册',
                 key:'/admin/form/register'
             },
+            {
+                title:'函数组件表单',
+                key:'/admin/form/funcForm'
+            },
+        ]
+    },
+    {
+        title:'表格',
+        key:'/admin/table',
+        children:[
+            {
+                title:'基本表单',
+                key:'/admin/table/basic'
+            },
+            {
+                title:'高级表单',
+                key:'/admin/table/senior'
+            }
         ]
     }
 ];

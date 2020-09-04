@@ -7,7 +7,8 @@ import Admin from './admin';
 import * as serviceWorker from './serviceWorker';
 import Router from './router';
 import 'antd/dist/antd.less';
-import Home from './pages/route_demo/route1/Home'
+import Home from './pages/route_demo/route1/Home';
+import './pages/config'
 /* <Home /> */
 
 ReactDOM.render(
