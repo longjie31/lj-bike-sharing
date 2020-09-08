@@ -1,5 +1,7 @@
 import React from 'react'
 import {HashRouter,Route, Switch} from 'react-router-dom'
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 import App from './App'
 import Login from './pages/login/login'
 import Admin from './admin';
@@ -17,6 +19,7 @@ import MyRegister from './pages/form/register'
 import MyFuncForm from './pages/form/funcForm'
 import MyBasicTab from './pages/table/basicTable'
 import MySeniorTab from './pages/table/seniorTab'
+import MyHooks from './pages/table/hook'
 
 
 export default class IRouter extends React.Component{
@@ -25,9 +28,10 @@ export default class IRouter extends React.Component{
         // 要有个最外层的根组件
         return(
             <HashRouter>
-                <App>
-                    <Route path='/login' component={Login} />
-                    <Route path='/admin' render={()=>
+                <ConfigProvider locale={zhCN}>
+                    <App>
+                        <Route path='/login' component={Login} />
+                        <Route path='/admin' render={()=>
                     <Admin>
                         <Switch> 
                             <Route path="/admin/ui/buttons" component={Button} />
@@ -43,11 +47,13 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/form/funcForm" component={MyFuncForm} />
                             <Route path="/admin/table/basic" component={MyBasicTab} />
                             <Route path="/admin/table/senior" component={MySeniorTab} />
+                            <Route path="/admin/table/hook" component={MyHooks} />
                             <Route component={NoMatch} />
                         </Switch>
                     </Admin>
-                    } />
-                </App>
+                        } />
+                    </App>
+                </ConfigProvider>
             </HashRouter>
         );
     } 

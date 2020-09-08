@@ -70,6 +70,10 @@ const menuList = [
             {
                 title:'高级表单',
                 key:'/admin/table/senior'
+            },
+            {
+                title:'hook的使用',
+                key:'/admin/table/hook'
             }
         ]
     }
