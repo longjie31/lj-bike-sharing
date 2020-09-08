@@ -4,6 +4,8 @@ import React, {
     useEffect,
     useRef
 } from 'react';
+import useCurrentValue from './myHook';
+import _ from 'lodash';
 
 
 import axios from './../../axios/index'
@@ -97,6 +99,8 @@ const MySeniorTable = () =>{
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
+    const selectedKeys = useCurrentValue([],selectedRowKeys);
+
     // 不能用useState，会导致数据更新不及时
     const currentKeys = useRef([]);
 
@@ -111,18 +115,14 @@ const MySeniorTable = () =>{
                 key:'all',
                 text:'全选',
                 onSelect:changeableRowKeys=>{
-                    debugger;
                     changeRowKeys(changeableRowKeys);
-                    // currentKeys.selectedRowKeys = changeableRowKeys;
                 }
             },
             {
                 key:'invert',
                 text:'反选',
                 onSelect:changeableRowKeys=>{
-                    debugger;
-                    console.log(selectedRowKeys);
-                    changeRowKeys(changeableRowKeys);
+                    changeRowKeys(_.difference(changeableRowKeys,selectedKeys.current));
                 }
             },
             {
@@ -158,14 +158,15 @@ const MySeniorTable = () =>{
         ],
         onSelect: (record, selected, selectedRows) => {
             console.log('onSelect',record, selected, selectedRows);
-            debugger;
             console.log(selectedRowKeys);
+            console.log(selectedKeys);
             if(selected){
-                setSelectedRowKeys(selectedRowKeys=>[...selectedRowKeys,record.key]);
+                setSelectedRowKeys(()=>[...selectedKeys.current,record.key]);
             }else{
-                const  newSelectedRowKeys = JSON.parse(JSON.stringify(selectedRowKeys));
-                newSelectedRowKeys.filter(item=>item!==record.key);
-                setSelectedRowKeys(selectedRowKeys=>[...newSelectedRowKeys]);
+                const newSelectedRowKeys = JSON.parse(JSON.stringify(selectedKeys.current));
+                console.log(newSelectedRowKeys.filter(item=>item!==record.key));
+                setSelectedRowKeys(()=>[...newSelectedRowKeys.filter(item=>item!==record.key)]);
+
             }
         },
         onChange: (selectedRowKeys, selectedRows) => {
@@ -184,12 +185,18 @@ const MySeniorTable = () =>{
     // 行点击事件
     const rowClick = (record,index)=>{
         setSelectedRowKeys(selectedRowKeys=>[...selectedRowKeys,record.key]);
+        if (selectedKeys.current.length > 0 && selectedKeys.current.includes(record.key)) {
+            selectedKeys.current = selectedKeys.current.filter(item => item !== record.key);
+            setSelectedRowKeys([...selectedKeys.current]);
+        } else {
+            setSelectedRowKeys(selectedRowKeys => [...selectedRowKeys, record.key]);
+        }
     }
 
     const changeRowSelection = (index) => {
         setMyRowSelection(Object.assign(myRowSelection, {
             selectedRowKeys: [index]
-        }))
+        }));
     }
 
     // 调用easy-mock数据
